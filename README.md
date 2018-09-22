@@ -54,4 +54,4 @@ Coming soon!
 
 ## Tweaking
 * To use your own images of cats and dogs change the urls in cats.txt and dogs.txt or put your images into the cats and dogs folder
-* In transfer learning train.py putting batch_size as high as your gpu can handle should improve performance
+* In transfer learning train.py putting batch_size as high as your ram can handle should improve performance
