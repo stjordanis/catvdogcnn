@@ -55,3 +55,4 @@ For a summary of the licence go to https://tldrlegal.com/license/gnu-general-pub
 ## Tweaking
 * To use your own images of cats and dogs change the URLs in cats.txt and dogs.txt or put your images into the cats and dogs folder
 * In transfer learning train.py putting batch_size as high as your ram can handle should improve performance
+* For distinguishing between two classes other than cats and dogs do the same as using your own images of cats and dogs but you will probably want to swap images/cats and images/dogs for your class names. You will also need to switch the directories [here](https://github.com/qwertpi/catvdogcnn/blob/5dd54e51bf34b6384d60a5346395a107e7a9daef/transfer%20learning%20train.py#L31) in transfer learning train.py
