@@ -34,8 +34,8 @@ For a summary of the licence go to https://tldrlegal.com/license/gnu-general-pub
 * h5py `pip3 install h5py`
 * PIL`pip3 install Pillow`
 * libhdf5 (only needed on some systems) `sudo apt-get install libhdf5-serial-dev`
-## One Liner Install (Linux Only)
-Coming soon!
+## One Liner Install (Not tested yet!)
+`curl https://raw.githubusercontent.com/qwertpi/catvdogcnn/master/install.bash | sudo bash`
 ### Manual Installation
 1\. Click the green button labelled clone or download
 
@@ -47,8 +47,8 @@ Coming soon!
 1\. Make a folder called images and then a folder called dogs and cats inside it `mkdir images && mkdir images/cats && mkdir images/dogs`  
 2a\. Run getdata.py on the dogs urls into the images/dogs folder `python3 getdata.py -u dogs.txt -o images/dogs/`  
 2b\. Run getdata.py on the cats urls `python3 getdata.py -u cats.txt -o images/cats/`  
-3a\. Run `cd cats/ && for file in *; do convert $file -resize 64x64 -gravity center -background "rgb(0,0,0)" -extent 64x64 $file; done` (only works on linux, windows users will need to find a way to batch resize images to 64 by 64 pixels filled with black to make it exactly 64 by 64)  
-3b\. Run `cd dogs/ && for file in *; do convert $file -resize 64x64 -gravity center -background "rgb(0,0,0)" -extent 64x64 $file; done`  
+3a\. Run `cd images/cats/ && for file in *; do convert $file -resize 64x64 -gravity center -background "rgb(0,0,0)" -extent 64x64 $file; done` (only works on linux, windows users will need to find a way to batch resize images to 64 by 64 pixels filled with black to make it exactly 64 by 64)  
+3b\. Run `cd images/dogs/ && for file in *; do convert $file -resize 64x64 -gravity center -background "rgb(0,0,0)" -extent 64x64 $file; done`  
 4\. Download the mobilenet-1-224 weights. I did this by changing the bit of lines 311 and 317 of /usr/local/lib/python3.5/dist-packages/keras_applications/mobilenet.py that says 'mobilenet_%s_%d' to read 'mobilenet_%s_224'. Your milage, line numbers and file paths may vary.  
 5\. Run transfer learning train.py  
 
