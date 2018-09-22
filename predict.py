@@ -11,4 +11,12 @@ img = np.array(img)
 img=np.array([img/255])
 model = load_model('model.h5')
 prediction=model.predict(img)
-print(prediction)
+if prediction.argmax()==0:
+    print("Cat with",prediction[0]*100+"%","certianty)
+elif prediction.argmax()==1:
+    print("Dog with",prediction[1]*100+"%","certianty)
+else:
+    print("Well this is awkard. This isn't meant to happen. Please submit an issue on GitHub with the following information")
+    print(prediction)
+    print(command)
+    print(file)
