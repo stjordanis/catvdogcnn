@@ -7,7 +7,7 @@ Feedback and pull requests are very welcome
 
 
 ## Copyright
-The getdata.py code is modified from this https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-using-google-images/  
+The [getdata.py](getdata.py) code is modified from this https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-using-google-images/  
 The image URLs are from imagenet
 
 Copyright © 2018  Rory Sharp All rights reserved.
@@ -20,7 +20,7 @@ the Free Software Foundation, either version 3 of the License, or
 You should have received a copy of the GNU General Public License
 along with this program.  If you have not received this, see <http://www.gnu.org/licenses/gpl-3.0.html>.
 
-For a summary of the licence go to https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3)
+For a summary of the licence go to https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)
 
 ## Prerequisites
 ### For One Liner
