@@ -34,8 +34,12 @@ For a summary of the licence go to https://tldrlegal.com/license/gnu-general-pub
 * h5py `pip3 install h5py`
 * PIL`pip3 install Pillow`
 * libhdf5 (only needed on some systems) `sudo apt-get install libhdf5-serial-dev`
-## One Liner Install (Not tested yet!) (Assumes you want to retrain)
-`curl https://raw.githubusercontent.com/qwertpi/catvdogcnn/master/install.bash | sudo bash`
+## Retraining One Liner Install (Not tested yet!)
+`curl https://raw.githubusercontent.com/qwertpi/catvdogcnn/master/rtinstall.bash | sudo bash`
+
+## Prediction One Liner Install (Not tested yet!)
+`curl https://raw.githubusercontent.com/qwertpi/catvdogcnn/master/prinstall.bash | sudo bash`
+
 ### Manual Installation
 1\. Click the green button labelled clone or download
 
