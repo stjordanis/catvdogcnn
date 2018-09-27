@@ -1,8 +1,14 @@
 from keras.preprocessing import image
 import numpy as np
 from keras.models import load_model
-from os import system as bash
+from subprocess import check_output as bash
 from time import time
+if "tmpfs" in bash("df -T /tmp",shell=True).decode("utf-8"):
+    print("Your system supports writing to RAM so image loading should be fast :)")
+else:
+    print("Your /tmp directory doesn't use RAM. This isn't an error it just means resizing the image will be a bit slower")
+    
+from os import system as bash
 
 file="some/file/path"
 if file[-1]=="/":
@@ -28,6 +34,7 @@ else:
     print(prediction)
     print(command)
     print(file)
+    print(bash("df -T /tmp",shell=True).decode("utf-8"))
     
 command="rm "+file
 bash(command)
