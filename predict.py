@@ -28,7 +28,7 @@ prediction=model.predict(img)
 if prediction.argmax()==0:
     print("Cat with",str(prediction[0][0]*100)+"%","certianty")
 elif prediction.argmax()==1:
-    print("Dog with",str(prediction[0][0]*100)+"%","certianty")
+    print("Dog with",str(prediction[0][1]*100)+"%","certianty")
 else:
     print("Well this is awkard. This isn't meant to happen. Please submit an issue on GitHub with the following information")
     print(prediction)
