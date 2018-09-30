@@ -1,3 +1,4 @@
+#code modified from https://medium.com/@kylepob61392/airplane-image-classification-using-a-keras-cnn-22be506fdb53
 from keras.models import load_model
 import numpy as np
 from os import listdir
