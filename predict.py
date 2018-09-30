@@ -10,7 +10,7 @@ else:
     
 from os import system as bash
 
-file="some/file/path"
+file="/some/file/path"
 if file[-1]=="/":
     file[:-1]
 
