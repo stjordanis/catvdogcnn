@@ -25,7 +25,9 @@ for url in rows:
             im = Image.open(requests.get(re.sub('farm..','',url), stream=True).raw)
             im.save(args["output"]+"{}.png".format(str(total).zfill(8)))
             total += 1
-
+            if total%10==0:
+                print(total)
 	# handle if any exceptions are thrown during the download process
 	except:
-		print("ERROR!")
+	    print("The image could not be found!")
+print(total)
