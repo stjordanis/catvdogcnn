@@ -1,12 +1,8 @@
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Dropout, Flatten, Dense
-from keras.layers import LeakyReLU
-from keras import backend as K
+from keras.layers import Dropout, Flatten, Dense
 from sklearn.model_selection import train_test_split
 from keras.applications import mobilenet
 import numpy as np
-from keras import callbacks
 from os import listdir
 from keras.preprocessing import image
 
