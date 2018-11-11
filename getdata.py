@@ -3,7 +3,6 @@
 import argparse
 import requests
 from PIL import Image
-import os
 import re
 
 # construct the argument parse and parse the arguments
