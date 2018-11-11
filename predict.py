@@ -1,7 +1,8 @@
 from keras.preprocessing import image
 import numpy as np
 from keras.models import load_model
-from time import time
+from subprocess import check_output as bash
+
 if "tmpfs" in bash("df -T /tmp",shell=True).decode("utf-8"):
     print("Your system supports writing to RAM so image loading should be fast :)")
 else:
