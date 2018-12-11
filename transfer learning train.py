@@ -15,20 +15,21 @@ def load_images(directories=[]):
             imgs.append(img/255)
             del img
     return imgs
-
-y_data=[]
-for i in range(0,132):
-    y_data.append([1,0])
-for i in range(0,132):
-    y_data.append([0,1])
+def load_y(directories):
+    y_data=[]
+    for i in range(0,len(listdir(directories[0]))):
+        y_data.append([1,0])
+    for i in range(0,len(listdir(directories[1]))):
+        y_data.append([0,1])
+    return y_data
 
 img_width, img_height = 64, 64
 mn=mobilenet.MobileNet(weights='imagenet', include_top=False, input_shape=(img_width, img_height, 3))
-x_data=["images/cats/","images/dogs/"]
-Y = np.array(y_data)
-X = np.array(load_images(x_data))
+dirs=["images/cats/","images/dogs/"]
+Y = np.array(load_y(dirs))
+X = np.array(load_images(dirs))
 input_shape = (img_width, img_height, 3)
-print(len(load_images(x_data)),"images")
+print(len(load_images(dirs)),"images")
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25)
 model = Sequential()
 model.add(mn)
