@@ -18,7 +18,11 @@ python3 getdata.py -u cats.txt -o images/cats/
 echo 'Resizing images'
 sleep 1s
 cd images/cats/ && for file in *; do convert $file -resize 64x64 -gravity center -background "rgb(0,0,0)" -extent 64x64 $file; done
+cd ..
+cd ..
 cd images/dogs/ && for file in *; do convert $file -resize 64x64 -gravity center -background "rgb(0,0,0)" -extent 64x64 $file; done
+cd ..
+cd ..
 read -p "Modifying keras source code to download the correct weights. This runs the risk of messing up Keras on your system. To continue press enter"
 sudo sed -i -e 's/mobilenet_%s_%d/mobilenet_%s_224/g' /usr/local/lib/python3.5/dist-packages/keras_applications/mobilenet.py 
 sudo sed -i -e 's/alpha_text, rows/alpha_text/g' /usr/local/lib/python3.5/dist-packages/keras_applications/mobilenet.py 
