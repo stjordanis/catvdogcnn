@@ -27,4 +27,4 @@ read -p "Modifying keras source code to download the correct weights. This runs 
 sudo sed -i -e 's/mobilenet_%s_%d/mobilenet_%s_224/g' /usr/local/lib/python3.5/dist-packages/keras_applications/mobilenet.py 
 sudo sed -i -e 's/alpha_text, rows/alpha_text/g' /usr/local/lib/python3.5/dist-packages/keras_applications/mobilenet.py 
 sudo sed -i -e 's/raise ValueError/warnings.warn/g' /usr/local/lib/python3.5/dist-packages/keras_applications/mobilenet.py 
-echo 'Done. You can now run transfer learning train.py'
+echo 'Done. You can now run train.py'
