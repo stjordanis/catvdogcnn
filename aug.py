@@ -38,9 +38,12 @@ for i in range(0,5):
         im = Image.fromarray(img)
         im.save("augmented/cats/aug_"+"{}.png".format(str(total).zfill(8)))
         total+=1
-    total=0
+
+total=0
+for i in range(0,5):
     dogs_aug = seq.augment_images(dogs)
     for img in dogs_aug:
         im = Image.fromarray(img)
         im.save("augmented/dogs/aug_"+"{}.png".format(str(total).zfill(8)))
         total+=1
+

@@ -6,13 +6,45 @@ from keras.preprocessing import image
 from sklearn.model_selection import train_test_split
 import numpy as np
 from os import listdir
+from os import system as bash
 from random import randint
-
-def load_images(directories,num):
-    #create a blank list to store the images in
+from math import ceil
+def val_cleanup(directories,tmp_dirs):
+    bash("mv test/"+tmp_dirs[0]+"* "+directories[0])
+    bash("mv test/"+tmp_dirs[1]+"* "+directories[1])
+    bash("rm -r test")
+def create_val(directories,tmp_dirs,num):
+    imgs=[]
+    
     dir_1_files=listdir(directories[0])
     dir_2_files=listdir(directories[1])
-    #loop over the list of directories we have been passed
+    
+    files=dir_1_files
+    bash("mkdir test/")
+    bash("mkdir test/"+tmp_dirs[0])
+    for i in range(0,num):
+        file=files.pop(randint(0,len(files)-1))
+        img = image.load_img(directories[0]+file, target_size=None)
+        img = np.array(img)
+        imgs.append(img/255)
+        bash("mv "+directories[0]+file+" test/"+tmp_dirs[0])
+        del img
+        
+    files=dir_2_files
+    bash("mkdir test/")
+    bash("mkdir test/"+tmp_dirs[1])
+    for i in range(0,num):
+        file=files.pop(randint(0,len(files)-1))
+        img = image.load_img(directories[1]+file, target_size=None)
+        img = np.array(img)
+        imgs.append(img/255)
+        bash("mv "+directories[1]+file+" test/"+tmp_dirs[1])
+        del img
+    return imgs   
+    
+def load_images(directories,num):
+    dir_1_files=listdir(directories[0])
+    dir_2_files=listdir(directories[1])
     while True:
             imgs=[]
             if len(dir_1_files)<num or len(dir_2_files)<num:
@@ -20,38 +52,24 @@ def load_images(directories,num):
                 dir_1_files=listdir(directories[0])
                 dir_2_files=listdir(directories[1])
             files=dir_1_files
-            #loop over the files that are contained in the directory
             for i in range(0,num):
                 file=files.pop(randint(0,len(files)-1))
-                #load the image in the directory directory with the filename file
                 img = image.load_img(directories[0]+file, target_size=None)
-                #convert it to a numpy array
                 img = np.array(img)
-                #/255 for data normalization
-                #append to the imgs list
                 imgs.append(img/255)
-                #delete the img variable to save RAM
                 del img
             files=dir_2_files
-            #loop over the files that are contained in the directory
             for i in range(0,num):
                 file=files.pop(randint(0,len(files)-1))
-                #load the image in the directory directory with the filename file
                 img = image.load_img(directories[1]+file, target_size=None)
-                #convert it to a numpy array
                 img = np.array(img)
-                #/255 for data normalization
-                #append to the imgs list
                 imgs.append(img/255)
-                #delete the img variable to save RAM
                 del img
             yield imgs
-def load_y(directories,num):
+def load_y(num):
     y_data=[]
-    #add [1,0] (0 one hot encoded) to y_data the same amount of times as the number of files in the first directory in direcotories
     for i in range(0,num):
         y_data.append([1,0])
-    #same but with second direcotry
     for i in range(0,num):
         y_data.append([0,1])
     return y_data
@@ -76,10 +94,18 @@ callbacks_list=[savebest]
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 #loads images
+i=0
+epochs=20
+epochs=ceil(epochs/2)
 dirs=["augmented/cats/","augmented/dogs/"]
-Y = np.array(load_y(dirs,32))
+tmp_dirs=["cats/","dogs/"]
+x_test=np.array(create_val(dirs,tmp_dirs,32))
+y_test=np.array(load_y(32))
+Y = np.array(load_y(32))
 for x in load_images(dirs,32):
+    if i>=epochs:
+        break
     X = np.array(x)
-    #creates train and test data
-    x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25)
     model.fit(X, Y, epochs = 2, batch_size=32, validation_data=(x_test, y_test),callbacks=callbacks_list)
+    i+=1
+val_cleanup(dirs,tmp_dirs)
