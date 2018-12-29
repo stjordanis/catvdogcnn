@@ -16,26 +16,32 @@ def load_images(directories=[]):
             img = image.load_img(directory+file, target_size=None)
             #convert it to a numpy array
             img = np.array(img)
-            #/255 for data normalization
             #append to the imgs list
             imgs.append(img)
             #delete the img variable to save RAM
             del img
     return imgs
-
+# define what we are going to do to the images
 seq = iaa.Sequential([
-      iaa.Multiply((0.5, 1.5)),
-      iaa.AdditiveGaussianNoise(scale=(0, 0.075*255),per_channel=True),
-      iaa.Crop(percent=(0, 0.3)), #0.3=30%
-      iaa.Fliplr(0.5)
-      ],random_order=True)
+      iaa.Multiply((0.5, 1.5)), #multiply each pixel by a random value 0.5-1.5
+      iaa.AdditiveGaussianNoise(scale=(0, 0.075*255),per_channel=True), #create rgb noise
+      iaa.Crop(percent=(0, 0.3)), #0.3=30% #crop 0-30% of the pixels from each image
+      iaa.Fliplr(0.5) #flip half of the images left to right
+      ],random_order=True) #apply the aformentioned transforms in a random order
 
+#load images
 cats=np.array(load_images(["images/cats/"]))
 dogs=np.array(load_images(["images/dogs/"]))
+
+#create 5 sets of augmented cat images
 for i in range(0,5):
+    #augemnt all the cat images
     cats_aug = seq.augment_images(cats)
+    #loop over the augmented images
     for img in cats_aug:
+        #turn the numpy array into an image
         im = Image.fromarray(img)
+        #save the image
         im.save("augmented/cats/aug_"+"{}.png".format(str(total).zfill(8)))
         total+=1
 
@@ -46,4 +52,4 @@ for i in range(0,5):
         im = Image.fromarray(img)
         im.save("augmented/dogs/aug_"+"{}.png".format(str(total).zfill(8)))
         total+=1
-
+        
