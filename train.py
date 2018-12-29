@@ -24,6 +24,8 @@ def load_images(directories=[]):
             #delete the img variable to save RAM
             del img
     return imgs
+
+
 def load_y(directories):
     y_data=[]
     #add [1,0] (0 one hot encoded) to y_data the same amount of times as the number of files in the first directory in direcotories
@@ -39,9 +41,10 @@ shape = (img_width, img_height, 3)
 #load MobileNet pretrained on imagenet with input_shape of the shape variable
 mn=mobilenet.MobileNet(weights='imagenet', include_top=False, input_shape=shape)
 
-#loads images
 dirs=["images/cats/","images/dogs/"]
+#creates the Y data
 Y = np.array(load_y(dirs))
+#loads all the images
 X = np.array(load_images(dirs))
 #tells the user the total number of images
 print(len(load_images(dirs)),"images")
@@ -49,7 +52,6 @@ print(len(load_images(dirs)),"images")
 #creates train and test data
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25)
 
-#adds dense layers after mobilenet
 model = Sequential()
 model.add(mn)
 model.add(Flatten())
@@ -62,6 +64,6 @@ print(model.summary())
 #same filename each time to force keras to overwrite the file each time and minimise the amount of disk space used
 savebest=callbacks.ModelCheckpoint(filepath='model.h5',monitor='val_loss',save_best_only=True)
 callbacks_list=[savebest]
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])\
 model.fit(X, Y, epochs = 15, batch_size=64, validation_data=(x_test, y_test),callbacks=callbacks_list)
