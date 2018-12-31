@@ -27,6 +27,7 @@ For a summary of the licence go to https://tldrlegal.com/license/gnu-general-pub
 * Curl `apt-get install curl`
 ### For Manual Install
 * [Python 3](https://www.python.org/downloads/)
+* ImageMagick (sic) `sudo apt-get install imagemagick`
 * Keras `pip3 install keras`
 * Numpy `pip3 install numpy`
 * TensorFlow `pip3 install tensorflow`
