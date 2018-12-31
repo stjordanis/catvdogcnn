@@ -13,11 +13,11 @@ ap.add_argument("-o", "--output", required=True,
     help="path to output directory of images")
 args = vars(ap.parse_args())
 
-# grab the list of URLs from the input file, then initialize the
-# total number of images downloaded thus far
+# grab the list of URLs from the input file
 rows = open(args["urls"],encoding="utf-8").read().strip().split("\n")
-total = 0
 
+# initialize the total number of images downloaded thus far
+total = 0
 # loop the URLs
 for url in rows:
     try:
