@@ -23,14 +23,14 @@ for url in rows:
     try:
         #use requests to get the raw data of the url and open it in PIL
         #re.sub is because removing the farm portion from static.flickr.com addresses makes them more likely to not 404
-            im = Image.open(requests.get(re.sub('farm..','',url), stream=True).raw)
+        im = Image.open(requests.get(re.sub('farm..','',url), stream=True).raw)
         #save the image with each image being concetivly named going 00000000.png then 00000001.png
-            im.save(args["output"]+"{}.png".format(str(total).zfill(8)))
+        im.save(args["output"]+"{}.png".format(str(total).zfill(8)))
         #add 1 to the total variable
-            total += 1
+         total += 1
         #every mutliple of 10 print the total
-            if total%10==0:
-                print(total)
+         if total%10==0:
+            print(total)
     # handle if any exceptions are thrown during the download process
     except:
         print("The image could not be found!")
