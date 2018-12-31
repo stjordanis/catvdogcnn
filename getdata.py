@@ -27,10 +27,10 @@ for url in rows:
         #save the image with each image being concetivly named going 00000000.png then 00000001.png
         im.save(args["output"]+"{}.png".format(str(total).zfill(8)))
         #add 1 to the total variable
-         total += 1
+        total += 1
         #every mutliple of 10 print the total
-         if total%10==0:
-            print(total)
+        if total%10==0:
+           print(total)
     # handle if any exceptions are thrown during the download process
     except:
         print("The image could not be found!")
