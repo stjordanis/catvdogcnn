@@ -1,7 +1,7 @@
 echo 'Updating your packages'
 sudo apt-get update && sudo apt-get upgrade -y
-echo 'Installing Python, the Python Package Installer and software to downlaod code from github'
-sudo apt-get install python3 python3-pip -y
+echo 'Installing Python, the Python Package Installer, software to download code from GitHub and software to resize images'
+sudo apt-get install python3 python3-pip git imagemagick -y
 echo 'Downloading code from Github'
 git clone https://github.com/qwertpi/catvdogcnn.git catdogcnn
 cd catdogcnn
@@ -11,7 +11,7 @@ sudo apt-get install libhdf5-serial-dev
 echo 'Auto creating folders to store images in. You can kill this install from this point onwards if you need to modfiy anything'
 sleep 1s
 mkdir images && mkdir images/cats && mkdir images/dogs
-echo 'Downlaoding images (this might take a while) (error messages are safe to ignore as long as they are not in excess as an image might have just been taken offline)'
+echo 'Downloading images (this might take a while) (error messages are safe to ignore as long as they are not in excess as an image might have just been taken offline)'
 sleep 1s
 python3 getdata.py -u dogs.txt -o images/dogs/
 python3 getdata.py -u cats.txt -o images/cats/
