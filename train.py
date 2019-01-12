@@ -21,8 +21,7 @@ def load_images(directories=[]):
             #/255 for data normalization
             #append to the imgs list
             imgs.append(img/255)
-            #delete the img variable to save RAM
-            del img
+            
     return imgs
 
 
@@ -36,11 +35,6 @@ def load_y(directories):
         y_data.append([0,1])
     return y_data
 
-img_width, img_height = 64, 64
-shape = (img_width, img_height, 3)
-#load MobileNet pretrained on imagenet with input_shape of the shape variable
-mn=mobilenet.MobileNet(weights='imagenet', include_top=False, input_shape=shape)
-
 dirs=["images/cats/","images/dogs/"]
 #creates the Y data
 Y = np.array(load_y(dirs))
@@ -52,6 +46,10 @@ print(len(load_images(dirs)),"images")
 #creates train and test data
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25)
 
+img_width, img_height = 64, 64
+shape = (img_width, img_height, 3)
+#load MobileNet pretrained on imagenet with input_shape of the shape variable
+mn=mobilenet.MobileNet(weights='imagenet', include_top=False, input_shape=shape)
 model = Sequential()
 model.add(mn)
 model.add(Flatten())
