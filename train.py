@@ -6,6 +6,7 @@ from keras.preprocessing import image
 from sklearn.model_selection import train_test_split
 import numpy as np
 from os import listdir
+from keras.optimizers import Adam
 
 def load_images(directories=[]):
     #create a blank list to store the images in
@@ -53,8 +54,6 @@ mn=mobilenet.MobileNet(weights='imagenet', include_top=False, input_shape=shape)
 model = Sequential()
 model.add(mn)
 model.add(Flatten())
-model.add(Dense(64, activation='relu'))
-model.add(Dropout(0.2))
 model.add(Dense(2, activation='softmax'))
 #tells the user the model summary for sanity checking
 print(model.summary())
@@ -63,5 +62,5 @@ print(model.summary())
 savebest=callbacks.ModelCheckpoint(filepath='model.h5',monitor='val_loss',save_best_only=True)
 callbacks_list=[savebest]
 
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs = 15, batch_size=64, validation_data=(x_test, y_test),callbacks=callbacks_list)
+model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.0001), metrics=['accuracy'])
+model.fit(x_train, y_train, epochs = 10, batch_size=64, validation_data=(x_test, y_test),callbacks=callbacks_list)
