@@ -102,14 +102,12 @@ mn=mobilenet.MobileNet(weights='imagenet', include_top=False, input_shape=shape)
 model = Sequential()
 model.add(mn)
 model.add(Flatten())
-model.add(Dense(64, activation='relu'))
-model.add(Dropout(0.2))
 model.add(Dense(2, activation='softmax'))
 #tells the user the model summary for sanity checking
 print(model.summary())
 
 #same filename each time to force keras to overwrite the file each time and minimise the amount of disk space used
-savebest=callbacks.ModelCheckpoint(filepath='model.h5',monitor='val_loss',save_best_only=True)
+savebest=callbacks.ModelCheckpoint(filepath='generator_model.h5',monitor='val_loss',save_best_only=True)
 callbacks_list=[savebest]
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
