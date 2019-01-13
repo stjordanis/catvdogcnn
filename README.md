@@ -1,5 +1,5 @@
 # catvdogcnn
-A CNN that uses transfer learning on mobilenet to achieve high accuracy in categorising whether an image contains a cat or a dog
+A CNN that uses transfer learning on mobilenet to decide if a low resolution image contains a cat or a dog
 
 WARNING ONLY LINUX IS OFFICIALLY SUPPORTED
 
