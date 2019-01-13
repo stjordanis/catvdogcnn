@@ -64,4 +64,4 @@ savebest=callbacks.ModelCheckpoint(filepath='model.h5',monitor='val_loss',save_b
 callbacks_list=[savebest]
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(X, Y, epochs = 15, batch_size=64, validation_data=(x_test, y_test),callbacks=callbacks_list)
+model.fit(x_train, y_train, epochs = 15, batch_size=64, validation_data=(x_test, y_test),callbacks=callbacks_list)
